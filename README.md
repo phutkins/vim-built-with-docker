@@ -1,8 +1,7 @@
 # vim-built-with-docker
 
-[![Build Status](https://travis-ci.org/AlexandreCarlton/vim-built-with-docker.svg?branch=master)](https://travis-ci.org/AlexandreCarlton/vim-built-with-docker)
 
-An experiment in building Vim inside a CentOS 7 Docker container.
+An experiment in building Vim inside a Ubuntu 18.04 Docker container.
 
 
 ## Motivation
@@ -26,11 +25,11 @@ $ make install
 
 ## Installing
 
-By default, the prefix to which vim is installed is `~/.local`. This can be
+By default, the prefix to which vim is installed is `/usr/local`. This can be
 changed by setting `PREFIX`:
 
 ```bash
-$ make install PREFIX=/usr/local
+$ make install PREFIX=~/.local
 ```
 
 However, elevated permissions may be needed if installing to a write-protected
