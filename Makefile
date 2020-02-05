@@ -1,17 +1,20 @@
 
-PREFIX := $(HOME)/.local
-VERSION := 8.0.1203
+PREFIX := /usr/local
+# Find available archives at https://github.com/vim/vim/releases. 
+# Choose your version and enter below.
+VERSION := 8.2.0210
+VERSION_GENERAL := vim82
 
 FEATURES := \
+	--with-features=huge \
+	--enable-multibyte \
 	--enable-cscope \
 	--enable-luainterp \
-	--enable-multibyte \
-	--enable-perlinterp \
-	--enable-pythoninterp \
 	--enable-rubyinterp \
-	--with-features=huge \
-	--without-x
-
+	--enable-perlinterp \
+	--enable-python3interp=yes \
+	--with-python3-config-dir=$(python3-config --configdir) \
+	--enable-gui=gtk3
 
 all: image vim
 .PHONY: all
@@ -40,7 +43,7 @@ vim/$(VERSION)/src/vim: vim/$(VERSION)
 			--volume=$(PREFIX):$(PREFIX) \
 			--workdir=$(shell pwd)/vim/$(VERSION) \
 			$(USER)/vim-build-dependencies \
-				sh -c './configure --prefix=$(PREFIX) $(FEATURES) && make -j'
+				sh -c './configure --prefix=$(PREFIX) $(FEATURES) && make VIMRUNTIMEDIR=$(PREFIX)/share/vim/$(VERSION_GENERAL)'
 
 vim: vim/$(VERSION)/src/vim
 .PHONY: vim
